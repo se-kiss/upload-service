@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kiss-upload
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kiss-upload
+  template:
+    metadata:
+      labels:
+        app: kiss-upload
+    spec:
+      containers:
+      - name: kiss-upload
+        image: registry.gitlab.com/nestz671/kiss-container-registries/upload:0.0.1
+        ports:
+        - containerPort: 5000
+        env:
+          - name: MONGODB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: mongodb-root-password
+          - name: MONGODB_URL
+            value: mongodb://root:$(MONGODB_PASSWORD)@mongodb:27017/kiss-upload?authSource=admin
+          - name: VIMEO_CLIENT_ID
+            value: d851aaf63a3248f4ee94ca2e1fa8e833cfce5a43
+          - name: VIMEO_ACCESS_TOKEN
+            value: cdef178210519e1705698a5612c40a4d
+          - name: VIMEO_CLIENT_SECRET
+            value: 5QPZW6wcYK43tzAwOeX7EV+ce8f5eru0oc7x486mKH5FUA+6Ykk2HttFZvuI1tJ5YEDNgFngYr4CtyvbQPon9k/NEPaDCoZ4n/bW6X+mBneuiTOjJuzWTUDbcfISAXgb
+        resources:
+          requests:
+            cpu: 10m
+            memory: 50Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+      imagePullSecrets:
+        - name: gitlab-docker-registry
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kiss-upload
+spec:
+  type: ClusterIP
+  selector:
+    app: kiss-upload
+  ports:
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
