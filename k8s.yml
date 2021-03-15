@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kiss-upload
-        image: registry.gitlab.com/nestz671/kiss-container-registries/upload:0.0.2
+        image: registry.gitlab.com/nestz671/kiss-container-registries/upload:0.0.11
         ports:
         - containerPort: 5000
         env:
@@ -31,6 +31,8 @@ spec:
             value: cdef178210519e1705698a5612c40a4d
           - name: VIMEO_CLIENT_SECRET
             value: 5QPZW6wcYK43tzAwOeX7EV+ce8f5eru0oc7x486mKH5FUA+6Ykk2HttFZvuI1tJ5YEDNgFngYr4CtyvbQPon9k/NEPaDCoZ4n/bW6X+mBneuiTOjJuzWTUDbcfISAXgb
+          - name: MIXCLOUD_ACCESS_TOKEN
+            value: Qh3U3aUF429Qg546wnyfYDgCx22NJmFv
         resources:
           requests:
             cpu: 10m
