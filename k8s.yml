@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
       - name: kiss-upload
-        image: registry.gitlab.com/nestz671/kiss-container-registries/upload:0.0.12
+        image: registry.gitlab.com/nestz671/kiss-container-registries/upload:0.0.13
         ports:
           - name: main-port
-            containerPort: 5000
+            containerPort: 3000
         env:
           - name: MONGODB_PASSWORD
             valueFrom:
@@ -51,10 +51,10 @@ metadata:
   annotations:
     dev.okteto.com/auto-ingress: "true"
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: kiss-upload
   ports:
     - port: 80
       protocol: TCP
-      targetPort: 5000
+      targetPort: 3000
