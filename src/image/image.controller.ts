@@ -41,5 +41,6 @@ export class ImageController {
       'Content-Length': img.length,
     });
     res.end(img);
+    console.log("img")
   }
 }
