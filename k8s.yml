@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kiss-upload
-        image: registry.gitlab.com/nestz671/kiss-container-registries/upload:0.0.13
+        image: registry.gitlab.com/nestz671/kiss-container-registries/upload:0.0.14
         ports:
           - name: main-port
             containerPort: 3000
