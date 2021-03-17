@@ -24,6 +24,7 @@ export class VideoService implements OnModuleInit {
       },
       function(uri: string) {
         fs.unlinkSync('./upload/video/' + fileName);
+        uri = uri.replace('s', '');
         res.status(HttpStatus.OK).json({ status: HttpStatus.OK, uri });
       },
       function(bytes_uploaded: number, bytes_total: number) {
